@@ -31,19 +31,42 @@ class ViewController: UIViewController {
         if let email = email.text {
             if let password = passwortText.text {
                 if signUpMode {
+                    //signUp
+                    
                     Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
                         if error != nil {
                             self.displayAlert(title: "Sign Up Error", message: error!.localizedDescription)
                         } else{
+                            if self.riderSwitch.isOn {
+                                //Driver
+                                let request = Auth.auth().currentUser?.createProfileChangeRequest()
+                                request?.displayName = "Driver"
+                                request?.commitChanges(completion: nil)
+                                self.performSegue(withIdentifier: "driverSegue", sender: nil)
+                            } else {
+                                //Rider
+                                let request = Auth.auth().currentUser?.createProfileChangeRequest()
+                                request?.displayName = "Rider"
+                                request?.commitChanges(completion: nil)
+                                self.performSegue(withIdentifier: "riderSegue", sender: nil)
+                            }
                             print("signUp OK")
+                            
                         }
                     }
                 } else {
+                    //LogIn
                     Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
                         if error != nil {
                             self.displayAlert(title: "Sign Up Error", message: error!.localizedDescription)
                         } else{
                             print("login OK")
+                            if user?.user.displayName == "Driver" {
+                                self.performSegue(withIdentifier: "driverSegue", sender: nil)
+                            } else {
+                                 self.performSegue(withIdentifier: "riderSegue", sender: nil)
+                            }
+                            
                         }
                     }
                     
