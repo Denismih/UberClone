@@ -7,19 +7,74 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var passwortText: UITextField!
+    @IBOutlet weak var riderSwitch: UISwitch!
+    @IBOutlet weak var signupBtn: UIButton!
+    @IBOutlet weak var switchBtn: UIButton!
+    @IBOutlet weak var riderLbl: UILabel!
+    @IBOutlet weak var driverLbl: UILabel!
+    
+    var signUpMode = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func signup(_ sender: Any) {
+        guard  email.text != "" && passwortText.text != "" else {return displayAlert(title: "Error", message: "Enter email and password")
+        }
+        if let email = email.text {
+            if let password = passwortText.text {
+                if signUpMode {
+                    Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+                        if error != nil {
+                            self.displayAlert(title: "Sign Up Error", message: error!.localizedDescription)
+                        } else{
+                            print("signUp OK")
+                        }
+                    }
+                } else {
+                    Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+                        if error != nil {
+                            self.displayAlert(title: "Sign Up Error", message: error!.localizedDescription)
+                        } else{
+                            print("login OK")
+                        }
+                    }
+                    
+                }
+            }
+        }
+        
     }
-
-
+    @IBAction func switchSignupLogin(_ sender: Any) {
+        if signUpMode {
+            signupBtn.setTitle("Login", for: .normal)
+            switchBtn.setTitle("Switch to SignUp", for: .normal)
+            riderSwitch.isHidden = true
+            riderLbl.isHidden = true
+            driverLbl.isHidden = true
+            signUpMode = !signUpMode
+        } else {
+            signupBtn.setTitle("Sign Up", for: .normal)
+            switchBtn.setTitle("Switch to Login", for: .normal)
+            riderSwitch.isHidden = false
+            riderLbl.isHidden = false
+            driverLbl.isHidden = false
+            signUpMode = !signUpMode
+        }
+    }
+    func displayAlert (title:String, message:String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertController, animated: true)
+        
+    }
+    
 }
 
