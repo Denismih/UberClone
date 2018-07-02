@@ -16,6 +16,7 @@
 		84CAD70620E2932300179AF8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84CAD70420E2932300179AF8 /* LaunchScreen.storyboard */; };
 		84CAD70E20E293BD00179AF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84CAD70D20E293BC00179AF8 /* GoogleService-Info.plist */; };
 		84D25FAB20E51340000C78EC /* DriverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D25FAA20E51340000C78EC /* DriverTableViewController.swift */; };
+		84D25FAD20EA6F07000C78EC /* DriverAcceptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D25FAC20EA6F07000C78EC /* DriverAcceptViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		84CAD70720E2932300179AF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84CAD70D20E293BC00179AF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		84D25FAA20E51340000C78EC /* DriverTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverTableViewController.swift; sourceTree = "<group>"; };
+		84D25FAC20EA6F07000C78EC /* DriverAcceptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAcceptViewController.swift; sourceTree = "<group>"; };
 		BA7C4A8F8CE5C22DE4675EC5 /* Pods-Uber.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Uber.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Uber/Pods-Uber.debug.xcconfig"; sourceTree = "<group>"; };
 		D3B00F95C85B641CFF73134A /* Pods-Uber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Uber.release.xcconfig"; path = "Pods/Target Support Files/Pods-Uber/Pods-Uber.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,6 +82,7 @@
 				84D25FAA20E51340000C78EC /* DriverTableViewController.swift */,
 				843DB3A620E4D6C800716237 /* RiderViewController.swift */,
 				84CAD6FF20E2932300179AF8 /* Main.storyboard */,
+				84D25FAC20EA6F07000C78EC /* DriverAcceptViewController.swift */,
 				84CAD70220E2932300179AF8 /* Assets.xcassets */,
 				84CAD70420E2932300179AF8 /* LaunchScreen.storyboard */,
 				84CAD70720E2932300179AF8 /* Info.plist */,
@@ -220,6 +223,7 @@
 				84D25FAB20E51340000C78EC /* DriverTableViewController.swift in Sources */,
 				843DB3A720E4D6C800716237 /* RiderViewController.swift in Sources */,
 				84CAD6FC20E2932300179AF8 /* AppDelegate.swift in Sources */,
+				84D25FAD20EA6F07000C78EC /* DriverAcceptViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

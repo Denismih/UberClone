@@ -210,10 +210,53 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="WHP-yj-oAx" kind="show" identifier="acceptSegue" id="KS8-Ib-8oC"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6f2-Fs-iKq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1641" y="797"/>
+        </scene>
+        <!--Driver Accept View Controller-->
+        <scene sceneID="vqn-Wi-T71">
+            <objects>
+                <viewController id="WHP-yj-oAx" customClass="DriverAcceptViewController" customModule="Uber" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sOI-UE-k4S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xKL-cl-fEl">
+                                <rect key="frame" x="20" y="84" width="335" height="335"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="xKL-cl-fEl" secondAttribute="height" multiplier="1:1" id="9Sw-Jj-n2R"/>
+                                </constraints>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z8a-Ji-4f8">
+                                <rect key="frame" x="132.5" y="437" width="109" height="30"/>
+                                <state key="normal" title="Accept Request"/>
+                                <connections>
+                                    <action selector="accept:" destination="WHP-yj-oAx" eventType="touchUpInside" id="exs-6X-j5U"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Z8a-Ji-4f8" firstAttribute="top" secondItem="xKL-cl-fEl" secondAttribute="bottom" constant="18" id="AxX-YH-dfN"/>
+                            <constraint firstItem="xKL-cl-fEl" firstAttribute="leading" secondItem="eQj-Nk-5gU" secondAttribute="leading" constant="20" id="Db5-A1-zab"/>
+                            <constraint firstItem="Z8a-Ji-4f8" firstAttribute="centerX" secondItem="sOI-UE-k4S" secondAttribute="centerX" id="NtI-oL-Bpx"/>
+                            <constraint firstItem="xKL-cl-fEl" firstAttribute="top" secondItem="eQj-Nk-5gU" secondAttribute="top" constant="20" id="RQH-ge-3qL"/>
+                            <constraint firstItem="eQj-Nk-5gU" firstAttribute="trailing" secondItem="xKL-cl-fEl" secondAttribute="trailing" constant="20" id="pfY-RA-6zx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eQj-Nk-5gU"/>
+                    </view>
+                    <connections>
+                        <outlet property="map" destination="xKL-cl-fEl" id="W0N-4v-qoK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YPS-MP-N7d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2351" y="797"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XxF-Gp-4Hg">

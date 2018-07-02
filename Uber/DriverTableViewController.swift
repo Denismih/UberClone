@@ -37,7 +37,7 @@ class DriverTableViewController: UITableViewController,  CLLocationManagerDelega
             self.rideRequests.append(snapshot)
             self.tableView.reloadData()
         }
-       
+        
         Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (timer) in
             self.tableView.reloadData()
         }
@@ -83,6 +83,28 @@ class DriverTableViewController: UITableViewController,  CLLocationManagerDelega
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let snapshot = rideRequests[indexPath.row]
+        performSegue(withIdentifier: "acceptSegue", sender: snapshot)
+    }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let acceptVC = segue.destination as? DriverAcceptViewController {
+            if let snapshot = sender as? DataSnapshot {
+                if let rideReqDict = snapshot.value as? [String:Any] {
+                    //print (rideReqDict)
+                    if let email = rideReqDict["email"] as? String {
+                        if let lat = rideReqDict["lat"] as? Double {
+                            if let lon = rideReqDict["lon"] as? Double {
+                              
+                                acceptVC.riderEmail = email
+                                acceptVC.riderCoord = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
