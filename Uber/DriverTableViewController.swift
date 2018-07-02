@@ -9,20 +9,45 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import  MapKit
 
-class DriverTableViewController: UITableViewController {
+extension Double {
+    var twoDecimal:String {
+        return String(format: "%.2f", self)
+    }
+}
+
+class DriverTableViewController: UITableViewController,  CLLocationManagerDelegate{
     
     var rideRequests: [DataSnapshot] = []
+    let locationManager = CLLocationManager()
+    var driverCoord = CLLocationCoordinate2D()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
         Database.database().reference().child("rideRequest").observe(.childAdded) { (snapshot) in
             self.rideRequests.append(snapshot)
             self.tableView.reloadData()
         }
-        
+       
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (timer) in
+            self.tableView.reloadData()
+        }
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let coord = manager.location?.coordinate {
+            driverCoord = coord
+        }
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -40,8 +65,19 @@ class DriverTableViewController: UITableViewController {
         
         let snapshot = rideRequests[indexPath.row]
         if let rideReqDict = snapshot.value as? [String:Any] {
+            //print (rideReqDict)
             if let email = rideReqDict["email"] as? String {
-                cell.textLabel?.text = email
+                if let lat = rideReqDict["lat"] as? Double {
+                    if let lon = rideReqDict["lon"] as? Double {
+                        let riderLocation = CLLocation(latitude: lat, longitude: lon)
+                        let driverLocation = CLLocation(latitude: driverCoord.latitude, longitude: driverCoord.longitude)
+                        let dist = (driverLocation.distance(from: riderLocation)/1000).twoDecimal
+                        
+                        cell.textLabel?.text = "\(email) - \(dist)km"
+                    }
+                }
+                
+                
             }
         }
         return cell
