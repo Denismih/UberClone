@@ -99,7 +99,7 @@ class DriverTableViewController: UITableViewController,  CLLocationManagerDelega
                               
                                 acceptVC.riderEmail = email
                                 acceptVC.riderCoord = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-                                
+                                acceptVC.driverCoord  = driverCoord
                             }
                         }
                     }
